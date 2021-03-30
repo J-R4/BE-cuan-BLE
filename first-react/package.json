@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
+    "@windmill/react-ui": "^0.5.1",
     "dotenv": "^8.2.0",
     "plotly.js": "^1.58.4",
     "react": "^17.0.2",

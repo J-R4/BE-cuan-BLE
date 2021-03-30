@@ -11,7 +11,6 @@ const UserNameForm = (props) => {
   }
 
   const handleOnChange = (event) => {
-    console.log(event.target.value)
     setNameChild(event.target.value)
   }
 

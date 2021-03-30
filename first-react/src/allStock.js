@@ -1,4 +1,4 @@
-[
+export const allStock = [
 {
 "name": "Microsoft Corporation",
 "symbol": "MSFT",
@@ -1489,7 +1489,7 @@
 },
 {
 "name": "ROYAL DUTCH SHELL ADR EA REP 2 CL'A' EUR0.07",
-"symbol": "RDS.A",
+"symbol": "RDSA",
 "has_intraday": false,
 "has_eod": false,
 "country": null,
@@ -1585,7 +1585,7 @@
 },
 {
 "name": "ROYAL DUTCH SHELL ADR EA REP 2 CL'B' EUR0.07",
-"symbol": "RDS.B",
+"symbol": "RDSB",
 "has_intraday": false,
 "has_eod": false,
 "country": null,
