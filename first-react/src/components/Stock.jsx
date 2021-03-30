@@ -40,9 +40,10 @@ const Stock = () => {
 
   return (
     <>
-      <h1>Cuan-Cuan Market</h1>
+      <img className="object-center md:object-top mx-auto" src="../CUAN.png" alt="CM Logo" width="200px" height="500px" />
       <p>Welcome, {name ? name : 'Good People'}</p>
       <UserNameForm theName={(name) => setName(name)} />
+      <br />
       {
         <StockGraph name={stockNames}
           xValue={stockChartXValues}

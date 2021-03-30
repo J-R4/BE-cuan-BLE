@@ -16,7 +16,7 @@ const StockGraph = (props) => {
             y: yValue,
             type: 'scatter',
             mode: 'lines+markers',
-            marker: { color: 'red' },
+            marker: { color: '#DAA520' },
           },
         ]}
         layout={{ width: 720, height: 440, title: name }}
