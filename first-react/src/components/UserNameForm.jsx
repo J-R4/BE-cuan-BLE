@@ -1,41 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-class UserNameForm extends React.Component {
-  constructor() {
-    super()
+const UserNameForm = (props) => {
 
-    this.state = {
-      name: '',
-    }
-  }
+  const [nama, setNameChild] = useState('')
 
-  formOnSubmit(event) {
+  const formOnSubmit = (event) => {
     event.preventDefault()
-    this.props.theName(this.state.name)// lempar ke parent
+    props.theName(nama)// lempar ke parent
+    setNameChild('')
   }
 
-  handleOnChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
+  const handleOnChange = (event) => {
+    console.log(event.target.value)
+    setNameChild(event.target.value)
   }
 
-  render() {
-    return (
-      <>
-        <form onSubmit={(event) => this.formOnSubmit(event)} action="">
-          <input
-            value={this.state.name}
-            type="text"
-            placeholder="enter your name"
-            name="name"
-            onChange={this.handleOnChange}
-          />
-          <button>Submit</button>
-        </form>
-      </>
-    )
-  }
+  return (
+    <>
+      <form onSubmit={(event) => formOnSubmit(event)} action="">
+        <input
+          value={nama}
+          type="text"
+          placeholder="enter your name"
+          name="name"
+          onChange={handleOnChange}
+        />
+        <button>Submit</button>
+      </form>
+    </>
+  )
 }
 
 export default UserNameForm
