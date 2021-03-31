@@ -17,12 +17,12 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
+    <Router className="App">
       <Switch>
         <Route exact path="/">
           <Home/>
         </Route>
-        <Route path="/detailStock">
+        <Route path="/detailStock/:symbol">
           <DetailStock/>
         </Route>
         <Route path="/stock">

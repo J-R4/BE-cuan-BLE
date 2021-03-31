@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { StockGraph, UserNameForm, StockDD } from '../components/index.js'
+import { StockGraph } from '../components/index.js'
 import { allStock } from '../allStock.js'
-
+import {
+  Link,
+  useParams
+} from "react-router-dom";
 const stockId = process.env.REACT_APP_STOCK_API
 
 const Stock = () => {
@@ -15,36 +18,33 @@ const Stock = () => {
 
   const [lowStockChartYValues, setLowYValues] = useState([])
 
-  const [allSymbols, setAllSymbol] = useState([])
   const [allNames, setAllStockName] = useState([])
+
   const [num, setNum] = useState(0)
+  const [stockName, setStockName] = useState('')
+
+  const { symbol } = useParams()
 
   useEffect(() => {
     fetchAllStock()
     fetchStock()
-  }, [num])
+  }, [])
 
   const fetchAllStock = () => {
-    let allSt = []
-    let allName = []
-
     allStock.forEach(el => {
-      allSt.push(el.symbol)
-      allName.push(el.name)
+      if (el.symbol === symbol) {
+        setStockName(el.name)
+      }
     })
-
-    setAllSymbol(allSt)
-    setAllStockName(allName)
   }
 
   const fetchStock = () => {
-    let theNumber = num ? num : 0
     let stockChartXValuesTemp = []
     let stockChartYValuesTemp = []
     let closeStockChartYValuesTemp = []
     let highStockChartYValuesTemp = []
     let lowStockChartYValuesTemp = []
-    let theAPI = `http://api.marketstack.com/v1/eod?access_key=${stockId}&symbols=${allSymbols[theNumber]}`
+    let theAPI = `http://api.marketstack.com/v1/eod?access_key=${stockId}&symbols=${symbol}`
 
     fetch(theAPI)
       .then(res => res.json())
@@ -73,32 +73,33 @@ const Stock = () => {
     <>
       <img className="object-center md:object-top mx-auto" src="../CUAN.png" alt="CM Logo" width="200px" height="500px" />
       <p>Welcome, {name ? name : 'Good People'}</p>
-      <UserNameForm theName={(name) => setName(name)} />
-      <StockDD allName={allNames} theNum={(num) => setNum(num)} />
       <br />
+      <Link to='/stock'>
+        Go Back
+      </Link>
       <h1>Open Detail</h1>
       {
-        <StockGraph name={allNames[num]}
+        <StockGraph name={stockName}
           xValue={stockChartXValues}
           yValue={stockChartYValues}>
         </StockGraph>
       }
       <h1>Close Detail</h1>
       {
-        <StockGraph name={allNames[num]}
+        <StockGraph name={stockName}
           xValue={stockChartXValues}
           yValue={closeStockChartYValues}>
         </StockGraph>
       }
       <h1>High Detail</h1>
       {
-        <StockGraph name={allNames[num]}
+        <StockGraph name={stockName}
           xValue={stockChartXValues}
           yValue={highStockChartYValues}>
         </StockGraph>
       }<h1>Low Detail</h1>
       {
-        <StockGraph name={allNames[num]}
+        <StockGraph name={stockName}
           xValue={stockChartXValues}
           yValue={lowStockChartYValues}>
         </StockGraph>

@@ -12,11 +12,18 @@ const Stock = () => {
   const [allSymbols, setAllSymbol] = useState([])
   const [allNames, setAllStockName] = useState([])
   const [num, setNum] = useState(0)
+  const [url, setUrl] = useState('')
 
   useEffect(() => {
     fetchAllStock()
-    fetchStock()
-  }, [num])
+  }, [])
+
+  useEffect(() => {
+    if (allSymbols.length) {
+      fetchStock()
+      setUrl(`detailStock/${allSymbols[num]}`)
+    }
+  }, [allSymbols, num])
 
   const fetchAllStock = () => {
     let allSt = []
@@ -67,8 +74,10 @@ const Stock = () => {
           yValue={stockChartYValues}>
         </StockGraph>
       }
-      <Link to='/detailStock'>
-        All Stock Detail
+      <Link to={url}>
+        {
+          url ? `Go to Detail of ${allNames[num]}` : ''
+        }
       </Link>
     </>
   )
