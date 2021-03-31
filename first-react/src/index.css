@@ -1,7 +1,5 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
-
 @layer base {
   h1 {
     @apply text-3xl font-bold;
@@ -10,3 +8,4 @@
     @apply text-xl font-semibold;
   }
 }
+@tailwind utilities;

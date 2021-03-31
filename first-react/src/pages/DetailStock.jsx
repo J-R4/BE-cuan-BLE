@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { StockGraph } from '../components/index.js'
 import { allStock } from '../allStock.js'
+import { useSelector, useDispatch } from 'react-redux'
 import {
   Link,
   useParams
@@ -8,32 +9,42 @@ import {
 const stockId = process.env.REACT_APP_STOCK_API
 
 const Stock = () => {
-  const [name, setName] = useState('')
-  const [stockChartXValues, setXValues] = useState([])
-  const [stockChartYValues, setYValues] = useState([])
+  const name = useSelector(state => state.name)
+  const stockChartXValues = useSelector(state => state.stockChartXValues)
+  const stockChartYValues = useSelector(state => state.stockChartYValues)
 
-  const [closeStockChartYValues, setCloseYValues] = useState([])
+  const closeStockChartYValues = useSelector(state => state.closeStockChartYValues)
+  const highStockChartYValues = useSelector(state => state.highStockChartYValues)
+  const lowStockChartYValues = useSelector(state => state.lowStockChartYValues)
 
-  const [highStockChartYValues, setHighYValues] = useState([])
+  const stockName = useSelector(state => state.stockName)
 
-  const [lowStockChartYValues, setLowYValues] = useState([])
+  const dispatch = useDispatch()
 
-  const [allNames, setAllStockName] = useState([])
+  // const [name, setName] = useState('')
+  // const [stockChartXValues, setXValues] = useState([])
+  // const [stockChartYValues, setYValues] = useState([])
 
-  const [num, setNum] = useState(0)
-  const [stockName, setStockName] = useState('')
+  // const [closeStockChartYValues, setCloseYValues] = useState([])
+
+  // const [highStockChartYValues, setHighYValues] = useState([])
+
+  // const [lowStockChartYValues, setLowYValues] = useState([])
+
+  // const [stockName, setStockName] = useState('')
 
   const { symbol } = useParams()
 
   useEffect(() => {
     fetchAllStock()
-    fetchStock()
+    // fetchStock()
   }, [])
 
   const fetchAllStock = () => {
     allStock.forEach(el => {
       if (el.symbol === symbol) {
-        setStockName(el.name)
+        dispatch({ type: 'stockName/set', payload: el.name })
+        // setStockName(el.name)
       }
     })
   }
@@ -58,11 +69,17 @@ const Stock = () => {
           lowStockChartYValuesTemp.push(el.low)
         });
 
-        setXValues(stockChartXValuesTemp)
-        setYValues(stockChartYValuesTemp)
-        setCloseYValues(closeStockChartYValuesTemp)
-        setHighYValues(highStockChartYValuesTemp)
-        setLowYValues(lowStockChartYValuesTemp)
+        dispatch({ type: 'xValue/set', payload: stockChartXValuesTemp })
+        dispatch({ type: 'yValue/set', payload: stockChartYValuesTemp })
+        dispatch({ type: 'closeValue/set', payload: closeStockChartYValuesTemp })
+        dispatch({ type: 'highValue/set', payload: highStockChartYValuesTemp })
+        dispatch({ type: 'lowValue/set', payload: lowStockChartYValuesTemp })
+
+        // setXValues(stockChartXValuesTemp)
+        // setYValues(stockChartYValuesTemp)
+        // setCloseYValues(closeStockChartYValuesTemp)
+        // setHighYValues(highStockChartYValuesTemp)
+        // setLowYValues(lowStockChartYValuesTemp)
       })
 
       .catch((err) => {
@@ -70,41 +87,48 @@ const Stock = () => {
       })
   }
   return (
-    <>
-      <img className="object-center md:object-top mx-auto" src="../CUAN.png" alt="CM Logo" width="200px" height="500px" />
+    <div className="text-center">
+      <Link to="/">
+        <img className="object-center md:object-top mx-auto" src="../CUAN.png" alt="CM Logo" width="200px" height="500px" />
+      </Link>
       <p>Welcome, {name ? name : 'Good People'}</p>
       <br />
       <Link to='/stock'>
-        Go Back
+        <button className='py-1 px-2 font-semibold rounded-lg shadow-md text-white bg-yellow-600 hover:bg-yellow-700 transform hover:scale-110 motion-reduce:transform-none'>
+          Back
+        </button>
       </Link>
-      <h1>Open Detail</h1>
-      {
-        <StockGraph name={stockName}
-          xValue={stockChartXValues}
-          yValue={stockChartYValues}>
-        </StockGraph>
-      }
-      <h1>Close Detail</h1>
-      {
-        <StockGraph name={stockName}
-          xValue={stockChartXValues}
-          yValue={closeStockChartYValues}>
-        </StockGraph>
-      }
-      <h1>High Detail</h1>
-      {
-        <StockGraph name={stockName}
-          xValue={stockChartXValues}
-          yValue={highStockChartYValues}>
-        </StockGraph>
-      }<h1>Low Detail</h1>
-      {
-        <StockGraph name={stockName}
-          xValue={stockChartXValues}
-          yValue={lowStockChartYValues}>
-        </StockGraph>
-      }
-    </>
+      <div className="grid grid-cols-2 gap-4 px-4 mx-auto">
+        <div>
+          <h1>Open Detail</h1>
+          <StockGraph name={stockName}
+            xValue={stockChartXValues}
+            yValue={stockChartYValues}>
+          </StockGraph>
+        </div>
+        <div>
+          <h1>Close Detail</h1>
+          <StockGraph name={stockName}
+            xValue={stockChartXValues}
+            yValue={closeStockChartYValues}>
+          </StockGraph>
+        </div>
+        <div>
+          <h1>High Detail</h1>
+          <StockGraph name={stockName}
+            xValue={stockChartXValues}
+            yValue={highStockChartYValues}>
+          </StockGraph>
+        </div>
+        <div>
+          <h1>Low Detail</h1>
+          <StockGraph name={stockName}
+            xValue={stockChartXValues}
+            yValue={lowStockChartYValues}>
+          </StockGraph>
+        </div>
+      </div>
+    </div>
   )
 }
 

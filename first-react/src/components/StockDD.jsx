@@ -31,9 +31,9 @@ const StockDD = (props) => {
             })
           }
         </select>
-        <button className='font-semibold rounded-lg shadow-md text-white bg-yellow-600 hover:bg-yellow-700 transform hover:scale-110 motion-reduce:transform-none'>
-          select
-      </button>
+        <button className='py-1 px-2 font-semibold rounded-lg shadow-md text-white bg-yellow-600 hover:bg-yellow-700 transform hover:scale-110 motion-reduce:transform-none'>
+          Select
+        </button>
       </form>
     </>
   )

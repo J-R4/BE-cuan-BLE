@@ -1,12 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'
+import { Windmill } from '@windmill/react-ui'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { Provider } from 'react-redux'
+import store from './store.js'
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <Windmill>
+        <App />
+      </Windmill>
+    </Provider>,
   </React.StrictMode>,
   document.getElementById('root')
 );
