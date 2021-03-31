@@ -1,5 +1,15 @@
 import React from 'react'
-import Stock from './components/Stock.jsx'
+
+import {
+  Stock, Home, Watch, DetailStock
+} from './pages/index.js'
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+
 import ReactDOM from 'react-dom'
 import { Windmill } from '@windmill/react-ui'
 
@@ -7,9 +17,22 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App container">
-      <Stock/>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Home/>
+        </Route>
+        <Route path="/detailStock">
+          <DetailStock/>
+        </Route>
+        <Route path="/stock">
+          <Stock/>
+        </Route>
+        <Route path="/watch">
+          <Watch/>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
