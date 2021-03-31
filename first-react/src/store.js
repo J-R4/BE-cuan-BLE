@@ -14,7 +14,10 @@ const initialState = {
   stockName: '',
   num: 0,
   url: '',
-  watchlist: []
+  watchlist: [],
+  watchUrl: [],
+  watchNames: [],
+  count: 0
 }
 
 function reducer(state = initialState, action) {
@@ -48,6 +51,14 @@ function reducer(state = initialState, action) {
       return { ...state, watchlistXValues: state.watchlistXValues.concat(payload) }
     case 'watchYValue/set':
       return { ...state, watchlistYValues: state.watchlistYValues.concat(payload) }
+    case 'watchUrl/set':
+      return { ...state, watchUrl: state.watchUrl.concat(payload) }
+    case 'watchNames/set':
+      return { ...state, watchNames: state.watchNames.concat(payload) }
+    case 'count/increment':
+      return { ...state, count: state.count + 1 }
+    case 'count/decrement':
+      return { ...state, count: state.count - 1 }
     default:
       break
   }

@@ -14,25 +14,29 @@ const Stock = () => {
   const allNames = useSelector(state => state.allNames)
   const num = useSelector(state => state.num)
   const url = useSelector(state => state.url)
-  const dispatch = useDispatch()
 
-  // const [name, setName] = useState('')
-  // const [stockChartXValues, setXValues] = useState([])
-  // const [stockChartYValues, setYValues] = useState([])
-  // const [allSymbols, setAllSymbol] = useState([])
-  // const [allNames, setAllStockName] = useState([])
-  // const [num, setNum] = useState(0)
-  // const [url, setUrl] = useState('')
+  const watchlist = useSelector(state => state.watchlist)
+  const count = useSelector(state => state.count)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     fetchAllStock()
   }, [])
 
   useEffect(() => {
+    if (watchlist.length) {
+      fetchWatchlist()
+      dispatch({ type: 'watchUrl/set', payload: `detailStock/${watchlist[count - 1]}` })
+      dispatch({ type: 'watchNames/set', payload: `detailStock/${allNames[num]}` })
+      dispatch({ type: 'count/increment' })
+    }
+  }, [watchlist])
+
+  useEffect(() => {
     if (allSymbols.length) {
-      // fetchStock()
+      fetchStock()
       dispatch({ type: 'url/set', payload: `detailStock/${allSymbols[num]}` })
-      // setUrl(`detailStock/${allSymbols[num]}`) // 
     }
   }, [allSymbols, num])
 
@@ -45,15 +49,9 @@ const Stock = () => {
       allName.push(el.name)
     })
 
-    // setAllSymbol(allSt) //
-    // setAllStockName(allName) //
     dispatch({ type: 'allSymbols/set', payload: allSt })
     dispatch({ type: 'allNames/set', payload: allName })
 
-  }
-
-  const addWatchlist = () => {
-    dispatch({ type: 'watchlist/set', payload: allSymbols[num] })
   }
 
   const fetchStock = () => {
@@ -72,9 +70,32 @@ const Stock = () => {
         });
         dispatch({ type: 'xValue/set', payload: stockChartXValuesTemp })
         dispatch({ type: 'yValue/set', payload: stockChartYValuesTemp })
+      })
 
-        // setXValues(stockChartXValuesTemp)
-        // setYValues(stockChartYValuesTemp)
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  const addWatchlist = () => {
+    dispatch({ type: 'watchlist/set', payload: allSymbols[num] })
+  }
+
+  const fetchWatchlist = () => {
+    let stockChartXValuesTemp = []
+    let stockChartYValuesTemp = []
+    let theAPI = `http://api.marketstack.com/v1/eod?access_key=${stockId}&symbols=${watchlist[count - 1]}`
+    fetch(theAPI)
+      .then(res => res.json())
+      .then(res => {
+
+        (res.data).forEach(el => {
+          stockChartXValuesTemp.push((el.date.split('').splice(0, 10).join('')))
+          stockChartYValuesTemp.push(el.open)
+        });
+
+        dispatch({ type: 'watchXValue/set', payload: stockChartXValuesTemp })
+        dispatch({ type: 'watchYValue/set', payload: stockChartYValuesTemp })
       })
 
       .catch((err) => {
@@ -91,11 +112,8 @@ const Stock = () => {
       <br />
       <StockDD allName={allNames} theNum={(num) => dispatch({ type: 'num/set', payload: num })} />
       <br />
-      <button className='py-1 px-2 font-semibold rounded-lg shadow-md text-white bg-yellow-600 hover:bg-yellow-700 transform hover:scale-110 motion-reduce:transform-none'>
+      <button onClick={addWatchlist} className='py-1 px-2 font-semibold rounded-lg shadow-md text-white bg-yellow-600 hover:bg-yellow-700 transform hover:scale-110 motion-reduce:transform-none'>
         Add to Your Watchlist
-        {
-          addWatchlist()
-        }
       </button>
       <br />
       {

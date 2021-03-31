@@ -6,6 +6,8 @@ import {
   Link,
   useParams
 } from "react-router-dom";
+import { HelperText } from '@windmill/react-ui'
+
 const stockId = process.env.REACT_APP_STOCK_API
 
 const Stock = () => {
@@ -37,7 +39,7 @@ const Stock = () => {
 
   useEffect(() => {
     fetchAllStock()
-    // fetchStock()
+    fetchStock()
   }, [])
 
   const fetchAllStock = () => {
@@ -91,7 +93,8 @@ const Stock = () => {
       <Link to="/">
         <img className="object-center md:object-top mx-auto" src="../CUAN.png" alt="CM Logo" width="200px" height="500px" />
       </Link>
-      <p>Welcome, {name ? name : 'Good People'}</p>
+      <br />
+      <p>Hope you got enough cuan today, {name ? name : 'Good People'}</p>
       <br />
       <Link to='/stock'>
         <button className='py-1 px-2 font-semibold rounded-lg shadow-md text-white bg-yellow-600 hover:bg-yellow-700 transform hover:scale-110 motion-reduce:transform-none'>
