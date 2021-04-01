@@ -25,7 +25,7 @@ const UserNameForm = (props) => {
           name="name"
           onChange={handleOnChange}
         />
-        <button className='py-1 px-2 font-semibold rounded-lg shadow-md text-white bg-yellow-600 hover:bg-yellow-700 transform hover:scale-110 motion-reduce:transform-none'>
+        <button className='py-0 px-1 font-semibold shadow-md text-white bg-yellow-500 hover:bg-yellow-700 transform hover:scale-110 motion-reduce:transform-none'>
           Submit
         </button>
       </form>

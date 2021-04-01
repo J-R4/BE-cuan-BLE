@@ -4,17 +4,17 @@ const initialState = {
   name: '',
   stockChartXValues: [],
   stockChartYValues: [],
-  watchlistXValues: [],
-  watchlistYValues: [],
   allSymbols: [],
   allNames: [],
+  num: 0,
+  url: '',
+  stockName: '',
   closeStockChartYValues: [],
   highStockChartYValues: [],
   lowStockChartYValues: [],
-  stockName: '',
-  num: 0,
-  url: '',
   watchlist: [],
+  watchlistXValues: [],
+  watchlistYValues: [],
   watchUrl: [],
   watchNames: [],
   count: 0,
@@ -63,9 +63,8 @@ function reducer(state = initialState, action) {
     case 'countTheCount/set':
       return { ...state, countTheCount: payload }
     default:
-      break
+      return state
   }
-  return state
 }
 
 const store = createStore(reducer)
