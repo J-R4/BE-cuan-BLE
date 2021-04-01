@@ -16,7 +16,9 @@ const Stock = () => {
   const url = useSelector(state => state.url)
 
   const watchlist = useSelector(state => state.watchlist)
+  const watchlistYValues = useSelector(state => state.watchlistYValues)
   const count = useSelector(state => state.count)
+  const countTheCount = useSelector(state => state.countTheCount)
 
   const dispatch = useDispatch()
 
@@ -25,13 +27,11 @@ const Stock = () => {
   }, [])
 
   useEffect(() => {
-    if (watchlist.length) {
+    if (countTheCount !== count) {
       fetchWatchlist()
-      dispatch({ type: 'watchUrl/set', payload: `detailStock/${watchlist[count - 1]}` })
-      dispatch({ type: 'watchNames/set', payload: `detailStock/${allNames[num]}` })
-      dispatch({ type: 'count/increment' })
+      dispatch({ type: 'countTheCount/set', payload: count })
     }
-  }, [watchlist])
+  }, [count])
 
   useEffect(() => {
     if (allSymbols.length) {
@@ -78,24 +78,35 @@ const Stock = () => {
   }
 
   const addWatchlist = () => {
-    dispatch({ type: 'watchlist/set', payload: allSymbols[num] })
+    let same = 0
+    for (let i = 0; i < watchlist.length; i++) {
+      if (watchlist[i] === allSymbols[num]) {
+        same++
+      }
+    }
+    if (!same) {
+      dispatch({ type: 'watchlist/set', payload: allSymbols[num] })
+      dispatch({ type: 'watchUrl/set', payload: `detailStock/${allSymbols[num]}` })
+      dispatch({ type: 'watchNames/set', payload: `${allNames[num]}` })
+      dispatch({ type: 'count/increment' })
+    }
   }
 
   const fetchWatchlist = () => {
-    let stockChartXValuesTemp = []
+    let hitung = count === 0 ? count : count - 1
     let stockChartYValuesTemp = []
-    let theAPI = `http://api.marketstack.com/v1/eod?access_key=${stockId}&symbols=${watchlist[count - 1]}`
+    let theAPI = `http://api.marketstack.com/v1/eod?access_key=${stockId}&symbols=${watchlist[hitung]}`
+    console.log(theAPI)
     fetch(theAPI)
       .then(res => res.json())
       .then(res => {
 
         (res.data).forEach(el => {
-          stockChartXValuesTemp.push((el.date.split('').splice(0, 10).join('')))
           stockChartYValuesTemp.push(el.open)
         });
 
-        dispatch({ type: 'watchXValue/set', payload: stockChartXValuesTemp })
         dispatch({ type: 'watchYValue/set', payload: stockChartYValuesTemp })
+        console.log(watchlistYValues, 'ini yvalue')
       })
 
       .catch((err) => {

@@ -10,7 +10,6 @@ const Watch = () => {
   const watchUrl = useSelector(state => state.watchUrl)
   const watchlist = useSelector(state => state.watchlist)
   const watchNames = useSelector(state => state.watchNames)
-
   return (
     <div className="flex-col text-center items-center">
       <Link to="/">
@@ -30,10 +29,10 @@ const Watch = () => {
                 yValue={watchlistYValues[i]}>
               </StockGraph>
 
-              <Link key={i + 2000} to={watchUrl}>
+              <Link key={i + (2000 / wl)} to={watchUrl[i]}>
                 <button className='py-1 px-2 font-semibold rounded-lg shadow-md text-white bg-yellow-600 hover:bg-yellow-700 transform hover:scale-110 motion-reduce:transform-none'>
                   {
-                    watchUrl ? `Detail of ${watchNames[i]} Stock` : ''
+                    watchUrl[i] ? `Detail of ${watchNames[i]} Stock` : `${watchNames[i]}`
                   }
                 </button>
               </Link>

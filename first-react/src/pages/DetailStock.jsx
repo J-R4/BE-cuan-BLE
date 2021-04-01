@@ -6,7 +6,6 @@ import {
   Link,
   useParams
 } from "react-router-dom";
-import { HelperText } from '@windmill/react-ui'
 
 const stockId = process.env.REACT_APP_STOCK_API
 
@@ -23,18 +22,6 @@ const Stock = () => {
 
   const dispatch = useDispatch()
 
-  // const [name, setName] = useState('')
-  // const [stockChartXValues, setXValues] = useState([])
-  // const [stockChartYValues, setYValues] = useState([])
-
-  // const [closeStockChartYValues, setCloseYValues] = useState([])
-
-  // const [highStockChartYValues, setHighYValues] = useState([])
-
-  // const [lowStockChartYValues, setLowYValues] = useState([])
-
-  // const [stockName, setStockName] = useState('')
-
   const { symbol } = useParams()
 
   useEffect(() => {
@@ -46,7 +33,6 @@ const Stock = () => {
     allStock.forEach(el => {
       if (el.symbol === symbol) {
         dispatch({ type: 'stockName/set', payload: el.name })
-        // setStockName(el.name)
       }
     })
   }
@@ -76,12 +62,6 @@ const Stock = () => {
         dispatch({ type: 'closeValue/set', payload: closeStockChartYValuesTemp })
         dispatch({ type: 'highValue/set', payload: highStockChartYValuesTemp })
         dispatch({ type: 'lowValue/set', payload: lowStockChartYValuesTemp })
-
-        // setXValues(stockChartXValuesTemp)
-        // setYValues(stockChartYValuesTemp)
-        // setCloseYValues(closeStockChartYValuesTemp)
-        // setHighYValues(highStockChartYValuesTemp)
-        // setLowYValues(lowStockChartYValuesTemp)
       })
 
       .catch((err) => {
