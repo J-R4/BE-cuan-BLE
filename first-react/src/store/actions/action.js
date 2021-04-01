@@ -10,7 +10,8 @@ export const fetchStock = (payload) => {
     let highStockChartYValuesTemp = []
     let lowStockChartYValuesTemp = []
     // let theAPI = `http://api.marketstack.com/v1/eod?access_key=${stockId}&symbols=${payload}`
-    let theAPI = `http://localhost:3000/${payload}`
+    // let theAPI = `http://localhost:3000/${payload}`
+    let theAPI = `https://be-cuan-able.herokuapp.com/${payload}`
 
     fetch(theAPI)
       .then(res => res.json())
