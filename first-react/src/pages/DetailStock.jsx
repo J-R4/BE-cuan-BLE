@@ -46,7 +46,8 @@ const Stock = () => {
     let closeStockChartYValuesTemp = []
     let highStockChartYValuesTemp = []
     let lowStockChartYValuesTemp = []
-    let theAPI = `http://api.marketstack.com/v1/eod?access_key=${stockId}&symbols=${symbol}`
+    // let theAPI = `http://api.marketstack.com/v1/eod?access_key=${stockId}&symbols=${symbol}`
+    let theAPI = `http://localhost:3000/${symbol}`
 
     fetch(theAPI)
       .then(res => res.json())

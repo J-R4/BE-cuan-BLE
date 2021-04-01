@@ -58,7 +58,9 @@ const Stock = () => {
   const fetchWatchlist = () => {
     let hitung = count === 0 ? count : count - 1
     let stockChartYValuesTemp = []
-    let theAPI = `http://api.marketstack.com/v1/eod?access_key=${stockId}&symbols=${watchlist[hitung]}`
+    // let theAPI = `http://api.marketstack.com/v1/eod?access_key=${stockId}&symbols=${watchlist[hitung]}`
+    let theAPI = `http://localhost:3000/${watchlist[hitung]}`
+
     console.log(theAPI)
     fetch(theAPI)
       .then(res => res.json())
