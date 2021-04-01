@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchStock } from '../store/actions/action.js'
 
 // const stockId = process.env.REACT_APP_STOCK_API 
-const stockId = a3973ebb793d184e80baa05ca8d7bb33
+const stockId = "a3973ebb793d184e80baa05ca8d7bb33"
 
 const Stock = () => {
   const name = useSelector(state => state.stocks.name)

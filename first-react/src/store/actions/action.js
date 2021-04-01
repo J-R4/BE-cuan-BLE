@@ -1,7 +1,8 @@
 export const fetchStock = (payload) => {
   return (dispatch) => {
     // const stockId = process.env.REACT_APP_STOCK_API
-    const stockId = a3973ebb793d184e80baa05ca8d7bb33
+    const stockId = "a3973ebb793d184e80baa05ca8d7bb33"
+    
     dispatch({ type: 'loading/set', payload: true })
     let stockChartXValuesTemp = []
     let stockChartYValuesTemp = []
