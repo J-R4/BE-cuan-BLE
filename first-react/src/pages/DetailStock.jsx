@@ -74,11 +74,17 @@ const Stock = () => {
         <img className="object-center md:object-top mx-auto" src="../CUAN.png" alt="CM Logo" width="200px" height="500px" />
       </Link>
       <br />
-      <p>Hope you got enough cuan today, {name ? name : 'Good People'}</p>
+      <p>Hope you got enough <i>cuan</i> today, <strong>{name ? name : 'Good People'}</strong></p>
       <br />
+      <Link to='/watch'>
+        <button className='py-1 px-2 font-semibold rounded-lg shadow-md text-white bg-yellow-600 hover:bg-yellow-700 transform hover:scale-110 motion-reduce:transform-none'>
+          Watchlist
+        </button>
+      </Link>
+      <span> - </span>
       <Link to='/stock'>
         <button className='py-1 px-2 font-semibold rounded-lg shadow-md text-white bg-yellow-600 hover:bg-yellow-700 transform hover:scale-110 motion-reduce:transform-none'>
-          Back
+          Stocklist
         </button>
       </Link>
       <div className="grid grid-cols-2 gap-4 px-4 mx-auto">

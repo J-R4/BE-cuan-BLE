@@ -113,7 +113,7 @@ export const allStock = [
 },
 {
 "name": "BERKSHIRE HATHAWAY INC",
-"symbol": "BRK.B",
+"symbol": "BRKB",
 "has_intraday": false,
 "has_eod": false,
 "country": null,

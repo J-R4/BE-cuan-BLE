@@ -17,7 +17,7 @@ const Watch = () => {
       </Link>
       <br />
       {
-        watchlist.length ? <p className="">Here is your WatchList, {name ? name : 'Good People'}</p> : <p>You doesn't have any watchlist yet, add it on the stocklist :) <i>(press the logo to go back)</i></p>
+        watchlist.length ? <p className="">Here is your WatchList, <strong>{name ? name : 'Good People'}</strong> <br /> <i>HAPPY TRADING :)</i></p> : <p>You doesn't have any watchlist yet, add it on the stocklist :) <i>(press the logo to go back)</i></p>
       }
       <br />
       <div className="grid h-4/5 grid-cols-2 gap-4">

@@ -118,7 +118,7 @@ const Stock = () => {
       <Link to="/">
         <img className="object-center md:object-top mx-auto" src="../CUAN.png" alt="CM Logo" width="200px" height="500px" />
       </Link>
-      <p className="">Welcome, {name ? name : 'Good People'}</p>
+      <p className="">Welcome, <strong>{name ? name : 'Good People'}</strong></p>
       <UserNameForm theName={(name) => dispatch({ type: 'name/set', payload: name })} />
       <br />
       <StockDD allName={allNames} theNum={(num) => dispatch({ type: 'num/set', payload: num })} />
