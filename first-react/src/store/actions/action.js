@@ -1,7 +1,5 @@
 export const fetchStock = (payload) => {
   return (dispatch) => {
-    // const stockId = process.env.REACT_APP_STOCK_API
-    const stockId = "a3973ebb793d184e80baa05ca8d7bb33"
     
     dispatch({ type: 'loading/set', payload: true })
     let stockChartXValuesTemp = []
@@ -9,8 +7,6 @@ export const fetchStock = (payload) => {
     let closeStockChartYValuesTemp = []
     let highStockChartYValuesTemp = []
     let lowStockChartYValuesTemp = []
-    // let theAPI = `http://api.marketstack.com/v1/eod?access_key=${stockId}&symbols=${payload}`
-    // let theAPI = `http://localhost:3000/${payload}`
     let theAPI = `https://be-cuan-able.herokuapp.com/${payload}`
 
     fetch(theAPI)
