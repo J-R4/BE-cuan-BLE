@@ -4,9 +4,6 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchStock } from '../store/actions/action.js'
 
-// const stockId = process.env.REACT_APP_STOCK_API 
-const stockId = "a3973ebb793d184e80baa05ca8d7bb33"
-
 const Stock = () => {
   const name = useSelector(state => state.stocks.name)
   const stockChartXValues = useSelector(state => state.stocks.stockChartXValues)
@@ -58,8 +55,6 @@ const Stock = () => {
   const fetchWatchlist = () => {
     let hitung = count === 0 ? count : count - 1
     let stockChartYValuesTemp = []
-    // let theAPI = `http://api.marketstack.com/v1/eod?access_key=${stockId}&symbols=${watchlist[hitung]}`
-    // let theAPI = `http://localhost:3000/${watchlist[hitung]}`
     let theAPI = `https://be-cuan-able.herokuapp.com/${watchlist[hitung]}`
 
     console.log(theAPI)
