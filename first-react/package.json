@@ -5,7 +5,6 @@
   "dependencies": {
     "@craco/craco": "^6.1.1",
     "@testing-library/jest-dom": "^5.11.10",
-    "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
     "@windmill/react-ui": "^0.5.1",
     "dotenv": "^8.2.0",
@@ -47,6 +46,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.4",
+    "@testing-library/react": "^11.2.6",
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.35",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.4"
